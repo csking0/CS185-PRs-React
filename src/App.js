@@ -1,25 +1,58 @@
-import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import NavBar from './components/navbar';
+import Body from './components/body';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            active :1
+        }
+        this.changetab = (id) => {
+            this.setState({active :id})
+        }
+    }
+
+    render() {
+
+        const tabs = [
+            {
+                id: 1,
+                title: "Introduction"
+            },
+            {
+                id: 2,
+                title: "Pictures"
+            },
+            {
+                id: 3,
+                title: "Sound Tests"
+            },
+            {
+                id: 4,
+                title: "Parts List"
+            },
+            {
+                id: 5,
+                title: "Email Verification"
+            }
+        ]
+
+        return (
+
+            <div className = "App">
+                <div className = "navbar">
+                    <NavBar tabs = {tabs} activetab = {this.state.active} ctab = {this.changetab}/>
+                </div>
+                <div className = "body">
+                    <Body activetab = {this.state.active}/>
+                </div>
+            </div>
+
+        );
+    }
 }
 
 export default App;
